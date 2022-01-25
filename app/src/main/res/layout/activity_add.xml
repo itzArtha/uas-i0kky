@@ -28,8 +28,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:inputType="none"
+        android:textIsSelectable="true"
         android:hint="Tanggal Lahir"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editAlamat" />
@@ -89,7 +90,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:id="@+id/opsi"
+        android:id="@+id/editJk"
         android:layout_width="311dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -105,7 +106,7 @@
             android:text="Wanita" />
 
         <RadioButton
-            android:id="@+id/kotlin"
+            android:id="@+id/pria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pria" />
@@ -114,7 +115,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSimpan"
         android:layout_width="311dp"
         android:layout_height="53dp"
         android:layout_marginTop="112dp"

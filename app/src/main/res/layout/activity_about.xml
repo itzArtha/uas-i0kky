@@ -81,4 +81,14 @@
         app:layout_constraintEnd_toStartOf="@+id/textView5"
         app:srcCompat="@drawable/apex" />
 
+    <Button
+        android:id="@+id/flwMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Follow Me!"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNama" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
