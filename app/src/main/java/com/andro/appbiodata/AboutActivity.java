@@ -7,21 +7,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class AboutActivity extends AppCompatActivity {
 
-    Button flwMe;
+    ImageView flwMe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        flwMe = (Button) findViewById(R.id.flwMe);
+        flwMe = findViewById(R.id.flwMe);
 
         flwMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("https://www.instagram.com/okkysatriaa/");
+                Uri uri = Uri.parse("https://www.instagram.com/ternakayam/");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }

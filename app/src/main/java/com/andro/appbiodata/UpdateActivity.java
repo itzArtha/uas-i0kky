@@ -2,12 +2,13 @@ package com.andro.appbiodata;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.widget.DatePicker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,12 +26,12 @@ import java.util.Locale;
 
 import okhttp3.Response;
 
-public class AddActivity extends AppCompatActivity {
+public class UpdateActivity extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
 
-    EditText nama, birthday, email, phone, alamat;
+    EditText nama, birthday, email, phone, alamat, id;
     TextView viewBirtday;
     RadioGroup jk;
     RadioButton jkl;
@@ -40,13 +41,16 @@ public class AddActivity extends AppCompatActivity {
     String getEmail;
     String getPhone;
     String getAlamat;
+    String getId;
     int getJk;
 
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_update);
 
+        id = (EditText) findViewById(R.id.editId);
         nama = (EditText) findViewById(R.id.editName);
         birthday = (EditText) findViewById(R.id.editBirthDay);
         viewBirtday = (TextView) findViewById(R.id.editBirthDay);
@@ -65,9 +69,11 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getId = id.getText().toString();
                 getNama = nama.getText().toString();
                 getBirthday = birthday.getText().toString();
                 getEmail = email.getText().toString();
@@ -78,7 +84,7 @@ public class AddActivity extends AppCompatActivity {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         jkl = (RadioButton) findViewById(checkedId);
-                        if(jkl.getText() == "Wanita") {
+                        if (jkl.getText() == "Wanita") {
                             getJk = 0;
                         } else {
                             getJk = 1;
@@ -88,10 +94,10 @@ public class AddActivity extends AppCompatActivity {
                 validate();
             }
         });
-
     }
 
-    void showDateDialog(){
+
+    void showDateDialog() {
         Calendar newCalendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -104,21 +110,21 @@ public class AddActivity extends AppCompatActivity {
                 viewBirtday.setText(dateFormatter.format(newDate.getTime()));
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog.show();
     }
 
     void validate() {
-        if(getNama.equals("") || getEmail.equals("") || getBirthday.equals("") || getPhone.equals("") || getAlamat.equals("")) {
-            Toast.makeText(AddActivity.this, "Data kurang lengkap bos, benerin dong!", Toast.LENGTH_SHORT).show();
+        if (getId.equals("") || getNama.equals("") || getEmail.equals("") || getBirthday.equals("") || getPhone.equals("") || getAlamat.equals("")) {
+            Toast.makeText(UpdateActivity.this, "Data kurang lengkap bos, benerin dong!", Toast.LENGTH_SHORT).show();
         } else {
             sendData();
         }
     }
 
     void sendData() {
-        AndroidNetworking.post("http://localhost:7000/add.php")
+        AndroidNetworking.post("http://192.168.100.42:7000/update.php?id=" + getId)
                 .addBodyParameter("nama", getNama)
                 .addBodyParameter("email", getEmail)
                 .addBodyParameter("phone", getPhone)
@@ -130,23 +136,24 @@ public class AddActivity extends AppCompatActivity {
                     public void onResponse(Response response) {
                         if (response.isSuccessful()) {
                             try {
-                            Intent intent = new Intent(AddActivity.this, ViewActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(AddActivity.this, "Sukses menambahkan data", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(UpdateActivity.this, ViewActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(UpdateActivity.this, "Sukses mengubah data", Toast.LENGTH_SHORT).show();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         } else {
-                            Toast.makeText(AddActivity.this, ""+ "Gagal menambah data: " + response.message(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateActivity.this, "" + "Gagal mengubah data", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        Toast.makeText(AddActivity.this, ""+ "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateActivity.this, "" + "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
 //                        Log.d("Error ", anError.getMessage());
                     }
                 });
+
     }
 }

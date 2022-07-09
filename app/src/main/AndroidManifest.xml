@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppBiodata"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".UpdateActivity"
+            android:exported="false" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +26,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".ViewActivity" />
         <activity android:name=".AddActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

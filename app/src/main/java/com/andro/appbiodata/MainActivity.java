@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     Button viewBtn;
     Button searchBtn;
     Button aboutBtn;
+    Button updateBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         viewBtn = (Button) findViewById(R.id.view);
         searchBtn = (Button) findViewById(R.id.search);
         aboutBtn = (Button) findViewById(R.id.about);
+        updateBtn = (Button) findViewById(R.id.updateBtn);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         viewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,10 +49,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         aboutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, UpdateActivity.class);
                 startActivity(intent);
             }
         });
